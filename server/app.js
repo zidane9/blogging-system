@@ -16,10 +16,10 @@ mongoose.connect('mongodb://localhost/blogging-system');
 
 let app = express();
 
-// app.use(cors);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(cors());
 
 app.use('/', index);
 app.use('/users', users);

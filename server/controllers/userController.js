@@ -14,6 +14,7 @@ let getAll = function (req, res, next) {
 };
 
 let createOne = function (req, res, next) {
+  console.log('---userController.createOne');
   // Creating hash and salt
   password(req.body.password).hash(function(error, hash) {
       if(error)
