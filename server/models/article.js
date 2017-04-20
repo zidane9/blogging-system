@@ -3,7 +3,9 @@
 const mongoose = require('mongoose');
 const stampIt = require('mongoose-stamp');
 
-let articlesSchema = new mongoose.Schema({
+let Schema = mongoose.Schema;
+
+let articlesSchema = new Schema({
   title: String,
   content: String,
   author : { type : Schema.Types.ObjectId, ref : 'User' },

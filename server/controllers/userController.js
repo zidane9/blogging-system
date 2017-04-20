@@ -21,13 +21,13 @@ let createOne = function (req, res, next) {
       else {
       // Store hash (incl. algorithm, iterations, and salt)
         User.create({
-          name : req.body.nameText,
+          name : req.body.name,
           username : req.body.username,
           email : req.body.email,
           password : hash
         }, function (error, user){
-          if(error) throw error;
-          res.send(user);
+          if(error) res.send(error);
+          else res.send(user);
         });
       }
     })

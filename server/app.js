@@ -4,8 +4,8 @@ const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const passport = require('passport');
-let Strategy = require('passport-local').Strategy;
+// const passport = require('passport');
+// let Strategy = require('passport-local').Strategy;
 
 let index = require('./routes/index');
 let users = require('./routes/users');

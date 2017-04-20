@@ -11,15 +11,13 @@ let User = require('../models/user');
 require('dotenv').config()
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Welcome' });
-});
+router.get('/', controller.getAll);
 
 router.post('/signup', controller.createOne);
 
 passport.use(new Strategy(
   function(username,password,cb){
-    User.findOne({email: username}, function (err, user) {
+    User.findOne({username: username}, function (err, user) {
     if (err) cb(err);
 
     if(!user){
