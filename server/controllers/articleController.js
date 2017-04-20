@@ -44,30 +44,63 @@ let getOne = (req, res, next) => {
 }
 
 let update = (req, res, next) => {
-
-  article.findOneAndUpdate({
-    _id: req.params.id
-  }, req.body, {
-    new: true
-  }, (err, article) => {
+  console.log('--articleController.update');
+  let decoded = Helpers.decodeToken(req.headers.token);
+  // console.log('--decoded',decoded);
+  Article.findOne({
+    _id: req.params.id})
+    .exec((err, article) => {
     if (err) {
       res.json(err);
     } else {
-      res.json(article);
+      console.log('xx',article.author);
+      if(article.author != decoded.id)
+      res.json({error:'you are not authorized!'});
+      else {
+      Article.findOneAndUpdate({
+        _id: req.params.id
+      }, req.body, {
+        new: true
+      }, (err, article) => {
+        if (err) {
+          res.json(err);
+        } else {
+          res.json(article);
+        }
+      })
     }
-  })
+  }
+})
 }
 
 let destroy = (req, res, next) => {
-  article.remove({
+  console.log('--articleController.destroy');
+  let decoded = Helpers.decodeToken(req.headers.token);
+  console.log('--decoded',decoded);
+  Article.findOne({
     _id: req.params.id
-  }, (err, article) => {
+  })
+    .exec((err, article) => {
     if (err) {
       res.json(err);
     } else {
-      res.json(article);
+      // console.log('xx',article.author);
+      if(article.author != decoded.id)
+      res.json({error:'you are not authorized!'});
+      else {
+        Article.remove({
+          _id: req.params.id
+        }, (err, article) => {
+          if (err) {
+            res.json(err);
+          } else {
+            res.json(article);
+          }
+        })
+      }
     }
   })
+
 }
 
 module.exports= {

@@ -1,6 +1,6 @@
 <template>
   <div>
-  <blog-card v-for="blog in blogs" key="index" :blog="blog"></blog-card>
+  <blog-card @postBlog="updateList" v-for="blog in blogs" key="index" :blog="blog"></blog-card>
 </div>
 </template>
 
@@ -17,7 +17,9 @@ export default {
   //   }
   // },
   methods : {
-
+    updateList(){
+      this.$emit('postBlog');
+    }
   }
   // mounted(){
   //   this.$emit('loaded')
