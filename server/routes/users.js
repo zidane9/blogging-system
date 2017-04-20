@@ -15,6 +15,42 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Welcome' });
 });
 
+router.post('/signup', controller.createOne);
+
+passport.use(new Strategy(
+  function(username,password,cb){
+    User.findOne({email: username}, function (err, user) {
+    if (err) cb(err);
+
+    if(!user){
+      cb(null,false);
+    }
+    else {
+    // Verifying a hash
+      passwordHash(password).verifyAgainst(user.password, function(error, verified) {
+          if(error)
+              throw new Error('Something went wrong!');
+          if(!verified) {
+              cb("Email or password invalid!");
+          } else {
+            let token = jwt.sign({
+              email: username
+              },
+              process.env.SECRET,
+              {expiresIn: '1h'});
+            cb(null, token);
+          }
+      });
+    }
+  }
+)
+}));
+
+router.use(passport.initialize());
+
+router.post('/login', passport.authenticate('local', {session:false}), function(req,res){
+  res.send(req.user);
+})
 
 
 module.exports = router;

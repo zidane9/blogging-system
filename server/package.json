@@ -4,6 +4,7 @@
   "description": "blogging server",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Darren",
@@ -15,6 +16,7 @@
     "express": "^4.15.2",
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.9.5",
+    "mongoose-stamp": "0.0.3",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "password-hash-and-salt": "^0.1.4"
