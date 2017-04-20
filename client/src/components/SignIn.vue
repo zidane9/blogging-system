@@ -44,7 +44,7 @@ export default {
             localStorage.setItem('token', response.data);
             this.$message('Login Sukses');
             self.$router.push('/')
-            // this.$emit('ifExist')
+            this.$emit('ifSignedIn')
           }else {
             this.$message.error('Login gagal');
           }

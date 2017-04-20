@@ -6,6 +6,8 @@ import 'element-ui/lib/theme-default/index.css'
 
 import SignUp from './components/SignUp.vue'
 import SignIn from './components/SignIn.vue'
+import PostBlog from './components/PostBlog.vue'
+import ListBlog from './components/ListBlog.vue'
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
@@ -21,6 +23,14 @@ const routes = [
   {
     path: '/signin',
     component : SignIn
+  },
+  {
+    path: '/post',
+    component : PostBlog
+  },
+  {
+    path: '/list',
+    component : ListBlog
   }
 ]
 

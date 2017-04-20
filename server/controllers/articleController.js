@@ -1,4 +1,5 @@
 const Article = require('../models/article');
+const Helpers = require('../helpers/authentication');
 
 let getAll = (req, res, next) => {
   Article.find()
@@ -13,8 +14,13 @@ let getAll = (req, res, next) => {
 }
 
 let createOne = (req, res, next) => {
-
-  Article.create(req.body, (err, article) => {
+  let decoded = Helpers.decodeToken(req.headers.token);
+  console.log('--decode',decoded);
+  Article.create({
+    title : req.body.title,
+    content : req.body.content,
+    author : decoded.id
+  }    , (err, article) => {
     if (err) {
       res.json(err);
     } else {

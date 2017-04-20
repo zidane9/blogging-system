@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 let decodeToken = function(token){
   try {
     var decoded = jwt.verify(token, 'secret');
-    return decoded._doc;
+    return decoded;
   } catch(err) {
     return ({error: err});
   }

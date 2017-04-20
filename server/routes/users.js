@@ -32,7 +32,9 @@ passport.use(new Strategy(
               cb("Email or password invalid!");
           } else {
             let token = jwt.sign({
-              email: username
+              id: user._id,
+              name: user.name,
+              username: username
               },
               process.env.SECRET,
               {expiresIn: '1h'});
